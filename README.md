@@ -48,8 +48,48 @@
         
         'img_path'          =>  '',
         
-        //'oss_path_format'   =>  'Ym/d',        // Y年 m月 d日 具体参见date函数的传参，"/"代表目录
+        'cut_start'         =>  0,               //截取开始位置
+         
+        'cut_end'           =>  100,             //截取结束位置
+        
+        //'oss_path_format'   =>  'Ym/d',        //Y年 m月 d日 具体参见date函数的传参，"/"代表目录
         
         //'bucket'            =>  '',            //存储空间
         
     ];
+
+- 使用示例
+    
+    1.添加/修改数据时：
+    
+      去掉图片的域名，保留相对路径入库：
+    
+      $pic = 'http://www.xxx.com/a.jpg';
+    
+      $pic = HtmlDomParserUtil::strReplaceImgDomain($pic, true);  // /a.jpg
+    
+      去掉富文本编辑器中图片的域名，保留相对路径入库：
+    
+      $description = 'aaa<img src="http://www.xxx.com/b.jpg" />';
+    
+      $description = HtmlDomParserUtil::strReplaceImgDomain($description);    // aaa<img src="/b.jpg" />
+    
+    2.读取数据的时候：
+    
+      补充图片完整的路径：
+      
+      $pic = '/a.jpg';
+      $pic = HtmlDomParserUtil::strReplaceImgPath($pic, true);      // http://www.xxx.com/a.jpg
+      
+      $description = 'aaa<img src="/b.jpg" />';
+      $description = HtmlDomParserUtil::strReplaceImgPath($description);    // aaa<img src="http://www.xxx.com/b.jpg" />
+
+    3.过滤图片和html标签,截取部分字符串
+    
+      $description = 'aaa<img src="http://www.xxx.com/b.jpg" />';
+      $description = HtmlDomParserUtil::mbSubStr($description);     // aaa
+    
+    4.获取富文本编辑器中所有图片的相对路径
+      
+      $description = 'aaa<img src="http://www.xxx.com/b.jpg" /><img src="http://www.xxx.com/c.jpg" />';
+      $image_array = HtmlDomParserUtil::getImgPathArray($description);      // ['b.jpg', 'c.jpg']

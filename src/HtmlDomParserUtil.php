@@ -101,7 +101,7 @@ class HtmlDomParserUtil
      */
     public function mbSubStr($content){
         $dom = $this->getObject($content);
-        return mb_substr($dom->plaintext, 0, 100, "UTF-8");         //获取纯文本内容
+        return mb_substr($dom->plaintext, config('oss.cut_start'), config('oss.cut_end'), "UTF-8");         //获取纯文本内容
     }
 
     /**
