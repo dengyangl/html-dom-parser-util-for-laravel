@@ -15,6 +15,7 @@
 
 ### 使用
 - 在config/app.php文件中添加以下内容：
+
     'providers' => [
     
         ...
