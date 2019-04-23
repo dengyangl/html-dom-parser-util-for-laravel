@@ -92,4 +92,4 @@
     4.获取富文本编辑器中所有图片的相对路径
       
       $description = 'aaa<img src="http://www.xxx.com/b.jpg" /><img src="http://www.xxx.com/c.jpg" />';
-      $image_array = HtmlDomParserUtil::getImgPathArray($description);      // ['b.jpg', 'c.jpg']
+      $image_array = HtmlDomParserUtil::getImgPathArray($description);      // ['/b.jpg', '/c.jpg']

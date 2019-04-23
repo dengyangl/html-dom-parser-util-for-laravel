@@ -97,11 +97,20 @@ class HtmlDomParserUtil
      * @description 使用HtmlDomParser获取纯文本内容,并截取指定长度的字符
      * @author dyl
      * @param $content
+     * @param int $string_start
+     * @param int $string_end
      * @return string
      */
-    public function mbSubStr($content){
+    public function mbSubStr($content, $string_start = 0, $string_end = 100){
         $dom = $this->getObject($content);
-        return mb_substr($dom->plaintext, config('oss.cut_start'), config('oss.cut_end'), "UTF-8");         //获取纯文本内容
+
+        $cut_start = config('oss.cut_start');
+        if ($string_start != 0) $cut_start = $string_start;
+
+        $cut_end = config('oss.cut_end');
+        if ($string_end != 100) $cut_end = $string_end;
+
+        return mb_substr($dom->plaintext, $cut_start, $cut_end, "UTF-8");         //获取纯文本内容
     }
 
     /**
